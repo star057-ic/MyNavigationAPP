@@ -23,9 +23,18 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Bundle에서 주문 메뉴 수신
-        val orderItem = arguments?.getString("subject") ?: "선택된 메뉴 없음"
-        binding.txtResult.text = "주문 내역: $orderItem"
+        val menuName = arguments?.getString("subject") ?: "선택된 메뉴 없음"
+        binding.txtResult.text = "선택한 메뉴: $menuName"
+
+        binding.btnAddToCart.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("cart_item", menuName)
+            }
+            findNavController().navigate(
+                R.id.action_detailFragment_to_cartFragment,
+                bundle
+            )
+        }
 
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
