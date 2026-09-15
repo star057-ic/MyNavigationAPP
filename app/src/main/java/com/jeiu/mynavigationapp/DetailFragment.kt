@@ -1,31 +1,23 @@
 package com.jeiu.mynavigationapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jeiu.mynavigationapp.databinding.FragmentDetailBinding
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailFragment : Fragment() {
 
-    private var _binding : FragmentDetailBinding? = null
+    private var _binding: FragmentDetailBinding? = null
     private val binding
         get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_detail, container, false)
+    ): View {
         _binding = FragmentDetailBinding.inflate(
             inflater,
             container,
@@ -36,12 +28,20 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val subject  =  arguments?.getString("subject") ?: "선택없음"
+
+        // HomeFragment에서 넘어온 "subject" 전달값 수신
+        val subject = arguments?.getString("subject") ?: "선택없음"
         binding.txtResult.text = "선택한 항목: $subject"
+
+        // 이전 화면으로 복귀
         binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()  //아전화면
+            findNavController().popBackStack()
         }
     }
 
-
+    // ViewBinding 메모리 해제
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
