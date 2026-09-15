@@ -11,13 +11,10 @@ import com.jeiu.mynavigationapp.databinding.FragmentMenuBinding
 class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null
-    private val binding
-        get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
         return binding.root
@@ -26,33 +23,25 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 각 과목 버튼 클릭 시 DetailFragment로 값 전달
-        binding.btnAndroid.setOnClickListener {
-            moveToDetail("Android")
-        }
+        // 각 메뉴 선택 시 주문 정보(음식 이름) 전달
+        binding.btnAndroid.setOnClickListener { moveToDetail("아메리카노 (3,000원)") }
+        binding.btnKotlin.setOnClickListener { moveToDetail("떡볶이 세트 (8,500원)") }
 
-        binding.btnKotlin.setOnClickListener {
-            moveToDetail("Kotlin")
-        }
-
-        // 이전 화면(HomeFragment)으로 복귀
         binding.btnBackHome.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
-    private fun moveToDetail(subjectText: String) {
+    private fun moveToDetail(menuName: String) {
         val bundle = Bundle().apply {
-            putString("subject", subjectText)
+            putString("subject", menuName) // Key 값 "subject" 유지
         }
-
         findNavController().navigate(
             R.id.action_menuFragment_to_detailFragment,
             bundle
         )
     }
 
-    // ViewBinding 메모리 해제
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
