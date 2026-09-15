@@ -26,6 +26,7 @@ class MenuFragment : Fragment() {
         // 각 메뉴 선택 시 주문 정보(음식 이름) 전달
         binding.btnAmericano.setOnClickListener { moveToDetail("아메리카노 (1,500원)") }
         binding.btnLatte.setOnClickListener { moveToDetail("카페라떼 (2,500원)") }
+        binding.btnHotChoco.setOnClickListener { moveToDetail("핫초코 (3,000원)") }
 
         binding.btnBackHome.setOnClickListener {
             findNavController().popBackStack()
