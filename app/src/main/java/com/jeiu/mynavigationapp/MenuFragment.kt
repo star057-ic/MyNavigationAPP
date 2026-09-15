@@ -24,8 +24,8 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 각 메뉴 선택 시 주문 정보(음식 이름) 전달
-        binding.btnAndroid.setOnClickListener { moveToDetail("아메리카노 (3,000원)") }
-        binding.btnKotlin.setOnClickListener { moveToDetail("떡볶이 세트 (8,500원)") }
+        binding.btnAmericano.setOnClickListener { moveToDetail("아메리카노 (1,500원)") }
+        binding.btnLatte.setOnClickListener { moveToDetail("카페라떼 (2,500원)") }
 
         binding.btnBackHome.setOnClickListener {
             findNavController().popBackStack()
